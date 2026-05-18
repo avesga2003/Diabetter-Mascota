@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>GlukoPet - Mi Compañero de Aventuras</title>
+    <link rel="stylesheet" href="cssstyle.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Canvas Principal del Juego -->
+        <canvas id="gameCanvas"></canvas>
+
+        <!-- Interfaz de Usuario (HUD) Superpuesta -->
+        <div id="hud-layer" class="ui-screen">
+            <!-- Barra Superior: Stats y Estado -->
+            <div class="hud-top">
+                <div class="stat-bar-container">
+                    <span class="stat-icon">❤️</span>
+                    <div class="bar-bg"><div id="bar-health" class="bar-fill health"></div></div>
+                </div>
+                <div class="stat-bar-container">
+                    <span class="stat-icon">🍖</span>
+                    <div class="bar-bg"><div id="bar-hunger" class="bar-fill hunger"></div></div>
+                </div>
+                <div class="stat-bar-container">
+                    <span class="stat-icon">⚡</span>
+                    <div class="bar-bg"><div id="bar-energy" class="bar-fill energy"></div></div>
+                </div>
+                <div class="gluko-meter" id="gluko-display">
+                    <span class="meter-label">Glucosa</span>
+                    <span id="gluko-value">100</span> <span class="unit">mg/dL</span>
+                    <div id="gluko-trend">➡️</div>
+                </div>
+            </div>
+
+            <!-- Centro: Alertas Educativas Dinámicas -->
+            <div id="educational-alert" class="hidden">
+                <p id="alert-text">¡Hola! Vamos a jugar juntos hoy.</p>
+                <button id="alert-close-btn" onclick="ui.hideAlert()">¡Entendido!</button>
+            </div>
+
+            <!-- Fila Inferior: Panel de Control Principal -->
+            <div class="hud-bottom">
+                <button class="action-btn" onclick="game.openMenu('food')">🍎 Comer</button>
+                <button class="action-btn" onclick="game.openMenu('insulin')">💉 Insulina</button>
+                <button class="action-btn" onclick="game.toggleSleep()">💤 Dormir</button>
+                <button class="action-btn" onclick="game.playMinigame()">🎮 Jugar</button>
+            </div>
+        </div>
+
+        <!-- Menú Desplegable de Alimentos -->
+        <div id="food-menu" class="modal hidden">
+            <div class="modal-content">
+                <h3>¿Qué vamos a comer?</h3>
+                <div class="food-grid" id="food-grid-container"></div>
+                <button class="close-modal-btn" onclick="ui.closeModals()">Cerrar</button>
+            </div>
+        </div>
+
+        <!-- Menú de Insulina / Corrección -->
+        <div id="insulin-menu" class="modal hidden">
+            <div class="modal-content">
+                <h3>Bolo de Insulina 💉</h3>
+                <p class="educational-note">La insulina ayuda a que la energía de los alimentos entre a las células de tu mascota.</p>
+                <div class="insulin-options">
+                    <button class="ins-btn dose-micro" onclick="game.administerInsulin(1)">Dosis Pequeña (1U)</button>
+                    <button class="ins-btn dose-med" onclick="game.administerInsulin(3)">Dosis Mediana (3U)</button>
+                </div>
+                <button class="close-modal-btn" onclick="ui.closeModals()">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts Modulares -->
+    <script src="jsaudio.js"></script>
+    <script src="jssaveSystem.js"></script>
+    <script src="jsstats.js"></script>
+    <script src="jsfoodSystem.js"></script>
+    <script src="jsanimations.js"></script>
+    <script src="jspet.js"></script>
+    <script src="jsui.js"></script>
+    <script src="jsgame.js"></script>
+</body>
+</html>

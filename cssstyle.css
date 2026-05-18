@@ -1,0 +1,240 @@
+:root {
+    --bg-sky-day: linear-gradient(to bottom, #a1c4fd, #c2e9fb);
+    --bg-sky-night: linear-gradient(to bottom, #1e3c72, #2a5298);
+    --health-color: #ff4b72;
+    --hunger-color: #ff9f43;
+    --energy-color: #10ac84;
+    --ui-panel: rgba(255, 255, 255, 0.92);
+    --text-main: #2c3e50;
+    --font-game: 'Comic Sans MS', 'Arial', sans-serif; /* Fallback amigable para niños */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #000;
+    font-family: var(--font-game);
+}
+
+#game-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: 480px; /* Consistencia en pantallas grandes */
+    margin: 0 auto;
+    background: var(--bg-sky-day);
+    overflow: hidden;
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.ui-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    pointer-events: none; /* Permite clicks pasantes al canvas si es necesario */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: env(safe-area-inset-top) 16px env(safe-area-inset-bottom) 16px;
+}
+
+.hud-top {
+    pointer-events: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.stat-bar-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 6px 12px;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.stat-icon { font-size: 1.2rem; }
+
+.bar-bg {
+    flex-grow: 1;
+    height: 14px;
+    background: #e0e0e0;
+    border-radius: 7px;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    width: 100%;
+    transition: width 0.4s ease-out;
+}
+.bar-fill.health { background: var(--health-color); }
+.bar-fill.hunger { background: var(--hunger-color); }
+.bar-fill.energy { background: var(--energy-color); }
+
+.gluko-meter {
+    background: #ffffff;
+    border: 4px solid #341f97;
+    border-radius: 16px;
+    padding: 10px;
+    text-align: center;
+    align-self: center;
+    box-shadow: 0 6px 0 #341f97;
+    min-width: 140px;
+}
+#gluko-value {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #341f97;
+}
+.unit { font-size: 0.8rem; color: #57606f; }
+
+#educational-alert {
+    pointer-events: auto;
+    background: #fffdf0;
+    border: 3px solid #ff9f43;
+    border-radius: 16px;
+    padding: 16px;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+#educational-alert p {
+    color: var(--text-main);
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    font-weight: bold;
+}
+#alert-close-btn {
+    background: #10ac84;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.hud-bottom {
+    pointer-events: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.action-btn {
+    background: #fff;
+    border: 3px solid #2c3e50;
+    padding: 12px 4px;
+    border-radius: 14px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 0 #2c3e50;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+.action-btn:active {
+    transform: translateY(4px);
+    box-shadow: 0 0px 0 #2c3e50;
+}
+
+/* Modales e Interfaces Desplegables */
+.modal {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.modal-content {
+    background: var(--ui-panel);
+    border-radius: 24px;
+    padding: 24px;
+    width: 100%;
+    max-width: 360px;
+    text-align: center;
+    border: 4px solid #2c3e50;
+}
+.food-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+}
+.food-item-btn {
+    background: white;
+    border: 2px solid #ccc;
+    border-radius: 16px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+.food-item-btn .icon { font-size: 1.8rem; }
+
+.insulin-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 20px 0;
+}
+.ins-btn {
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    font-weight: bold;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
+.dose-micro { background: #54a0ff; }
+.dose-med { background: #2e86de; }
+
+.close-modal-btn {
+    background: #ee5253;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-weight: bold;
+}
+
+.hidden { display: none !important; }
+
+@keyframes popIn {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
