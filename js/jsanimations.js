@@ -1,9 +1,52 @@
 // js/animations.js
 class PetRenderer {
     constructor() {
+        // --- SISTEMA DE CARGA ASÍNCRONA DE SPRITES Y FONDOS ---
+        this.sprites = {};
+        this.fondoDia = new Image();
+        this.fondoNoche = new Image();
+        this.loaded = false;
+        this.imagesToLoad = 0;
+        this.imagesLoaded = 0;
+
+        // Registramos los estados de la mascota vinculándolos a su ruta de asset física
+        this.registerSprite('idle', 'assets/images/mascota_idle.png');
+        this.registerSprite('happy', 'assets/images/mascota_feliz.png');
+        this.registerSprite('excited', 'assets/images/mascota_feliz.png'); // Usa feliz o añade un sprite exclusivo si lo deseas
+        this.tiredSprite = this.registerSprite('tired', 'assets/images/mascota_cansada.png');
+        this.registerSprite('sick', 'assets/images/mascota_enferma.png');
+        this.registerSprite('sleeping', 'assets/images/mascota_dormida.png');
+
+        // Registro de fondos ambientales independientes
+        this.imagesToLoad += 2;
+        this.fondoDia.src = 'assets/images/fondo_dia.png';
+        this.fondoDia.onload = () => this.checkAllImagesLoaded();
+        this.fondoNoche.src = 'assets/images/fondo_noche.png';
+        this.fondoNoche.onload = () => this.checkAllImagesLoaded();
+
+        // Variables de temporización y control de partículas estructurales
         this.bounceTimer = 0;
         this.blinkTimer = 0;
         this.particles = [];
+    }
+
+    // Registra internamente la imagen del sprite y escucha su evento de carga
+    registerSprite(key, src) {
+        this.imagesToLoad++;
+        const img = new Image();
+        img.src = src;
+        img.onload = () => this.checkAllImagesLoaded();
+        img.onerror = () => console.error(`Error crítico cargando el asset en: ${src}`);
+        this.sprites[key] = img;
+    }
+
+    // Verifica la carga completa de todo el set gráfico antes de habilitar el renderizado en el bucle
+    checkAllImagesLoaded() {
+        this.imagesLoaded++;
+        if (this.imagesLoaded >= this.imagesToLoad) {
+            this.loaded = true;
+            console.log("GlukoPet Engine: Todos los assets visuales cargados con éxito.");
+        }
     }
 
     addParticle(x, y, color) {
@@ -31,6 +74,22 @@ class PetRenderer {
     }
 
     render(ctx, centerX, centerY, state, dt) {
+        // Pantalla de precarga preventiva si el hardware tarda en leer los archivos físicos
+        if (!this.loaded) {
+            ctx.fillStyle = "#a1c4fd";
+            ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+            ctx.fillStyle = "#2c3e50";
+            ctx.font = "bold 20px 'Comic Sans MS', Arial, sans-serif";
+            ctx.textAlign = "center";
+            ctx.fillText("Cargando mundo...", ctx.canvas.width / 2, ctx.canvas.height / 2);
+            return;
+        }
+
+        // --- 1. RENDERIZADO DEL FONDO ESCÉNICO ---
+        const fondoActual = (state === 'sleeping') ? this.fondoNoche : this.fondoDia;
+        ctx.drawImage(fondoActual, 0, 0, ctx.canvas.width, ctx.canvas.height);
+
+        // --- 2. CÁLCULO DE FÍSICAS Y DEFORMACIÓN DE LA MASCOTA ---
         this.bounceTimer += dt * (state === 'tired' || state === 'sick' ? 1.5 : 4);
         this.blinkTimer += dt;
 
@@ -40,96 +99,34 @@ class PetRenderer {
 
         if (state === 'sleeping') {
             bounce = Math.sin(this.bounceTimer * 0.5) * 2;
-            scaleX = 1.02; scaleY = 0.98;
+            scaleX = 1.02; 
+            scaleY = 0.98;
+        }
+
+        // --- 3. DIBUJO DEL SPRITE SELECCIONADO ---
+        let activeSprite = this.sprites[state];
+        
+        // Fallback de seguridad por si algún estado dinámico no encuentra su archivo físico
+        if (!activeSprite) {
+            activeSprite = this.sprites['idle'];
         }
 
         ctx.save();
+        
+        // Trasladamos el contexto al centro del canvas aplicando el rebote orgánico del motor
         ctx.translate(centerX, centerY + bounce);
         ctx.scale(scaleX, scaleY);
 
-        // 1. CUERPO DE LA MASCOTA (Estilo Slime/Tamagotchi redondeado)
-        let bodyColor = "#48dbfb"; // Color base amigable (Cyan)
-        if (state === 'sick') bodyColor = "#a4b0be";
-        if (state === 'sleeping') bodyColor = "#54a0ff";
-        if (state === 'excited') bodyColor = "#feca57";
+        // Dimensiones del sprite escaladas para dispositivos móviles (Fácilmente modificables)
+        const width = 160;
+        const height = 160;
 
-        ctx.fillStyle = bodyColor;
-        ctx.beginPath();
-        // Dibujamos un óvalo estilizado caricaturesco
-        ctx.arc(0, 0, 75, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.lineWidth = 6;
-        ctx.strokeStyle = "#2c3e50";
-        ctx.stroke();
-
-        // 2. OJOS
-        let isBlinking = (Math.floor(this.blinkTimer) % 4 === 0) && (this.blinkTimer - Math.floor(this.blinkTimer) < 0.15);
-        ctx.fillStyle = "#2c3e50";
-
-        let eyeOffsetX = 26;
-        let eyeOffsetY = -15;
-        let eyeRadius = 10;
-
-        if (isBlinking || state === 'sleeping') {
-            // Ojos cerrados (líneas arqueadas)
-            ctx.lineWidth = 5;
-            ctx.strokeStyle = "#2c3e50";
-            ctx.beginPath();
-            ctx.arc(-eyeOffsetX, eyeOffsetY, eyeRadius, Math.PI, 0, true);
-            ctx.stroke();
-            ctx.beginPath();
-            ctx.arc(eyeOffsetX, eyeOffsetY, eyeRadius, Math.PI, 0, true);
-            ctx.stroke();
-        } else if (state === 'sick') {
-            // Ojos mareados / tristes (X o diagonales)
-            ctx.lineWidth = 4;
-            ctx.strokeStyle = "#2c3e50";
-            this.drawCrossEye(ctx, -eyeOffsetX, eyeOffsetY, 8);
-            this.drawCrossEye(ctx, eyeOffsetX, eyeOffsetY, 8);
-        } else {
-            // Ojos normales abiertos con brillo blanco alegre
-            ctx.beginPath();
-            ctx.arc(-eyeOffsetX, eyeOffsetY, eyeRadius, 0, Math.PI * 2);
-            ctx.arc(eyeOffsetX, eyeOffsetY, eyeRadius, 0, Math.PI * 2);
-            ctx.fill();
-            // Brillo
-            ctx.fillStyle = "#ffffff";
-            ctx.beginPath();
-            ctx.arc(-eyeOffsetX - 3, eyeOffsetY - 3, 3, 0, Math.PI * 2);
-            ctx.arc(eyeOffsetX - 3, eyeOffsetY - 3, 3, 0, Math.PI * 2);
-            ctx.fill();
-        }
-
-        // 3. BOCA DINÁMICA SEGÚN EMOCIÓN
-        ctx.lineWidth = 5;
-        ctx.strokeStyle = "#2c3e50";
-        ctx.fillStyle = "#ff6b6b";
-
-        ctx.beginPath();
-        if (state === 'happy' || state === 'excited') {
-            // Gran sonrisa feliz abierta
-            ctx.arc(0, 10, 16, 0, Math.PI, false);
-            ctx.closePath();
-            ctx.fill();
-            ctx.stroke();
-        } else if (state === 'sick' || state === 'tired') {
-            // Curva triste o preocupada
-            ctx.arc(0, 22, 12, Math.PI, 0, false);
-            ctx.stroke();
-        } else if (state === 'sleeping') {
-            // Boca pequeña redonda (respirando)
-            ctx.beginPath();
-            ctx.arc(0, 15, 4, 0, Math.PI * 2);
-            ctx.stroke();
-        } else {
-            // Sonrisa sutil por defecto (Idle)
-            ctx.arc(0, 8, 12, 0, Math.PI, false);
-            ctx.stroke();
-        }
+        // Dibujamos la textura centrando los ejes relativos respecto al punto translate
+        ctx.drawImage(activeSprite, -width / 2, -height / 2, width, height);
 
         ctx.restore();
 
-        // RENDERIZADO DE PARTÍCULAS INTERACTIVAS
+        // --- 4. RENDERIZADO DE PARTÍCULAS INTERACTIVAS (Efectos de Comida/Insulina) ---
         this.updateParticles(dt);
         this.particles.forEach(p => {
             ctx.save();
@@ -140,12 +137,5 @@ class PetRenderer {
             ctx.fill();
             ctx.restore();
         });
-    }
-
-    drawCrossEye(ctx, x, y, size) {
-        ctx.beginPath();
-        ctx.moveTo(x - size, y - size); ctx.lineTo(x + size, y + size);
-        ctx.moveTo(x + size, y - size); ctx.lineTo(x - size, y + size);
-        ctx.stroke();
     }
 }
