@@ -142,27 +142,36 @@ canvas {
     cursor: pointer;
 }
 
-.hud-bottom {
+.hud-bottom.grid-2x2 {
     pointer-events: auto;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-    margin-bottom: 24px;
+    grid-template-columns: repeat(2, 1fr); /* Crea 2 columnas iguales */
+    grid-template-rows: repeat(2, 1fr);    /* Crea 2 filas iguales */
+    gap: 16px;                              /* Más espacio entre botones para evitar toques falsos */
+    margin-bottom: calc(24px + env(safe-area-inset-bottom)); /* Espacio de seguridad para móviles modernos */
+    width: 100%;
+    padding: 0 8px;                         /* Margen interno para que no peguen al borde de la pantalla */
 }
 
 .action-btn {
     background: #fff;
     border: 3px solid #2c3e50;
-    padding: 12px 4px;
-    border-radius: 14px;
+    padding: 20px 8px;                      /* Aumentamos drásticamente el padding vertical para hacerlos altos */
+    border-radius: 20px;                    /* Esquinas más redondeadas y amigables como en tu boceto */
     font-weight: bold;
-    font-size: 0.9rem;
-    box-shadow: 0 4px 0 #2c3e50;
+    font-size: 1.1rem;                      /* Texto un poco más grande y legible */
+    color: #2c3e50;
+    box-shadow: 0 6px 0 #2c3e50;            /* Efecto 3D más marcado */
     cursor: pointer;
-    transition: transform 0.1s;
+    transition: transform 0.1s, box-shadow 0.1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;                               /* Espacio entre el emoji y el texto */
 }
+
 .action-btn:active {
-    transform: translateY(4px);
+    transform: translateY(6px);             /* Baja por completo cubriendo el relieve */
     box-shadow: 0 0px 0 #2c3e50;
 }
 
