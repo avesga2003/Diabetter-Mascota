@@ -94,8 +94,8 @@ class PetRenderer {
         this.blinkTimer += dt;
 
         let bounce = Math.sin(this.bounceTimer) * 8;
-        let scaleX = 1 + Math.sin(this.bounceTimer) * 0.03;
-        let scaleY = 1 - Math.sin(this.bounceTimer) * 0.03;
+        let scaleX = 1 + Math.sin(this.bounceTimer) * 0.02;
+        let scaleY = 1 - Math.sin(this.bounceTimer) * 0.02;
 
         if (state === 'sleeping') {
             bounce = Math.sin(this.bounceTimer * 0.5) * 2;
@@ -118,8 +118,8 @@ class PetRenderer {
         ctx.scale(scaleX, scaleY);
 
         // Dimensiones del sprite escaladas para dispositivos móviles (Fácilmente modificables)
-        const width = 160;
-        const height = 160;
+        const width = 240;
+        const height = 240;
 
         // Dibujamos la textura centrando los ejes relativos respecto al punto translate
         ctx.drawImage(activeSprite, -width / 2, -height / 2, width, height);

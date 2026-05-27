@@ -70,7 +70,7 @@ const game = {
         this.drawBackground();
 
         const centerX = this.canvas.width / 2;
-        const centerY = this.canvas.height / 2 + 30;
+        const centerY = this.canvas.height / 2 + 100;
         this.pet.renderer.render(this.ctx, centerX, centerY, state, dt);
 
         // Actualizar elementos HUD
