@@ -82,8 +82,8 @@ canvas {
 }
 
 .stat-icon-img {
-    width: 24px;
-    height: 24px;
+    width: 34px;
+    height: 34px;
     object-fit: contain;
 }
 
@@ -151,8 +151,8 @@ canvas {
 
 
 .gluko-icon-img {
-    width: 24px;
-    height: 24px;
+    width: 44px;
+    height: 44px;
     object-fit: contain;
 }
 
@@ -165,27 +165,34 @@ canvas {
 }
 
 #gluko-trend-box {
-    background: #3964b3;                     /* Azul vibrante idéntico para el fondo del botón derecho */
-    border: 2px solid #233b6e;               /* Contorno oscuro uniforme */
-    border-radius: 10px;                     /* Bordes redondeados más suaves */
-    width: 28px;
+    background: transparent !important; /* Eliminamos el fondo azul vibrante */
+    border: none !important;             /* Eliminamos el contorno oscuro */
+    border-radius: 0;                    /* Ya no necesitamos redondear */
+    
+    /* Mantenemos el tamaño y la alineación flexbox para que 
+       el ícono siga centrado verticalmente respecto al valor */
+    width: 28px; 
     height: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 4px;
     
-    /* Relieve 3D sutil para el icono de la flecha */
-    box-shadow: 
-        inset 0 2px 0 rgba(255, 255, 255, 0.4),
-        0 2px 0 #1b2f59;
+    /* Ajustamos el margen para que pegue un poco más al texto "mg/dL" */
+    margin-left: 6px; 
+    
+    /* Eliminamos el relieve 3D */
+    box-shadow: none !important; 
 }
 
 #gluko-trend-img {
-    width: 14px;
-    height: 14px;
-    object-fit: contain;
-}   
+    /* Como ya no tiene el recuadro que lo contiene, debemos 
+       agrandar el PNG personalizado para que se vea bien prominente 
+       al lado del número grande. Pruebe entre 22px y 26px */
+    width: 44px; 
+    height: 44px;
+    
+    object-fit: contain; /* Mantiene la proporción del PNG */
+}
 
 .unit {
     font-family: var(--font-game);
@@ -193,7 +200,7 @@ canvas {
     color: #5d6d88;                          /* Tono intermedio para la unidad */
     font-weight: bold;
     align-self: flex-end;
-    margin-bottom: 2px;
+    margin-bottom: 4px;
 }
 
 #educational-alert {
@@ -247,6 +254,9 @@ canvas {
     box-shadow: 0 6px 0 var(--ui-border-color);
     cursor: pointer;
     transition: transform 0.05s, box-shadow 0.05s;
+
+    padding: 16px 44px 16px 16px;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -260,8 +270,8 @@ canvas {
 
 /* Control de tamaño para los PNG de los botones */
 .btn-icon-img {
-    width: 28px;
-    height: 28px;
+    width: 48px;
+    height: 48px;
     object-fit: contain;
 }
 
