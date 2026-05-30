@@ -12,43 +12,58 @@
         <canvas id="gameCanvas"></canvas>
 
         <!-- Interfaz de Usuario (HUD) Superpuesta -->
-        <div id="hud-layer" class="ui-screen">
-            <!-- Barra Superior: Stats y Estado -->
-            <div class="hud-top">
-                <div class="stat-bar-container">
-                    <span class="stat-icon">❤️</span>
-                    <div class="bar-bg"><div id="bar-health" class="bar-fill health"></div></div>
-                </div>
-                <div class="stat-bar-container">
-                    <span class="stat-icon">🍖</span>
-                    <div class="bar-bg"><div id="bar-hunger" class="bar-fill hunger"></div></div>
-                </div>
-                <div class="stat-bar-container">
-                    <span class="stat-icon">⚡</span>
-                    <div class="bar-bg"><div id="bar-energy" class="bar-fill energy"></div></div>
-                </div>
-                <div class="gluko-meter" id="gluko-display">
-                    <span class="meter-label">Glucosa</span>
-                    <span id="gluko-value">100</span> <span class="unit">mg/dL</span>
-                    <div id="gluko-trend">➡️</div>
-                </div>
+    <div id="hud-layer" class="ui-screen">
+        
+        <div class="hud-top">
+            <div class="stat-bar-container">
+                <img src="assets/images/ico_salud.png" alt="Salud" class="stat-icon-img">
+                <div class="bar-bg"><div id="bar-health" class="bar-fill health"></div></div>
+                <span class="stat-percentage" id="txt-health">100%</span>
+            </div>
+            
+            <div class="stat-bar-container">
+                <img src="assets/images/ico_hambre.png" alt="Hambre" class="stat-icon-img">
+                <div class="bar-bg"><div id="bar-hunger" class="bar-fill hunger"></div></div>
+                <span class="stat-percentage" id="txt-hunger">55%</span>
+            </div>
+            
+            <div class="stat-bar-container">
+                <img src="assets/images/ico_energia.png" alt="Energía" class="stat-icon-img">
+                <div class="bar-bg"><div id="bar-energy" class="bar-fill energy"></div></div>
+                <span class="stat-percentage" id="txt-energy">90%</span>
             </div>
 
-            <!-- Centro: Alertas Educativas Dinámicas -->
-            <div id="educational-alert" class="hidden">
-                <p id="alert-text">¡Hola! Vamos a jugar juntos hoy.</p>
-                <button id="alert-close-btn" onclick="ui.hideAlert()">¡Entendido!</button>
-            </div>
-
-            <!-- Fila Inferior: Panel de Control Principal -->
-            <div class="hud-bottom grid-2x2">
-                <button class="action-btn" onclick="game.openMenu('food')">🍎 Comer</button>
-                <button class="action-btn" onclick="game.openMenu('insulin')">💉 Insulina</button>
-                <button class="action-btn" onclick="game.toggleSleep()">💤 Dormir</button>
-                <button class="action-btn" onclick="game.playMinigame()">🎮 Jugar</button>
+            <div class="gluko-meter" id="gluko-display">
+                <div class="gluko-header">Glucosa</div>
+                <div class="gluko-body">
+                    <img src="assets/images/ico_gota.png" alt="Glucosa" class="gluko-icon-img">
+                    <span id="gluko-value">131</span>
+                    <span class="unit">mg/dL</span>
+                    <div id="gluko-trend-box"><img src="assets/images/arrow_stable.png" id="gluko-trend-img" alt="Tendencia"></div>
+                </div>
             </div>
         </div>
 
+        <div id="educational-alert" class="hidden">
+            <p id="alert-text">¡Hola! Vamos a jugar juntos hoy.</p>
+            <button id="alert-close-btn" onclick="ui.hideAlert()">¡Entendido!</button>
+        </div>
+
+        <div class="hud-bottom grid-2x2">
+            <button class="action-btn" onclick="game.openMenu('food')">
+                <img src="assets/images/btn_comer.png" alt="Comer" class="btn-icon-img"> Comer
+            </button>
+            <button class="action-btn" onclick="game.openMenu('insulin')">
+                <img src="assets/images/btn_insulina.png" alt="Insulina" class="btn-icon-img"> Insulina
+            </button>
+            <button class="action-btn" onclick="game.toggleSleep()">
+                <img src="assets/images/btn_dormir.png" alt="Dormir" class="btn-icon-img"> Dormir
+            </button>
+            <button class="action-btn" onclick="game.playMinigame()">
+                <img src="assets/images/btn_jugar.png" alt="Jugar" class="btn-icon-img"> Jugar
+            </button>
+        </div>
+    </div>
         <!-- Menú Desplegable de Alimentos -->
         <div id="food-menu" class="modal hidden">
             <div class="modal-content">

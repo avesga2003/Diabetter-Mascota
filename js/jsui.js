@@ -5,10 +5,14 @@ const ui = {
     },
 
     updateHUD(stats) {
-        // Actualización de barras de progreso
+// Actualización de barras de progreso visuales
         document.getElementById('bar-health').style.width = `${stats.health}%`;
         document.getElementById('bar-hunger').style.width = `${stats.hunger}%`;
         document.getElementById('bar-energy').style.width = `${stats.energy}%`;
+        // NUEVO: Actualización de los textos de porcentaje (%)
+        document.getElementById('txt-health').innerText = `${Math.round(stats.health)}%`;
+        document.getElementById('txt-hunger').innerText = `${Math.round(stats.hunger)}%`;
+        document.getElementById('txt-energy').innerText = `${Math.round(stats.energy)}%`;
 
         // Medidor de Glucosa
         const glukoValElement = document.getElementById('gluko-value');
@@ -28,10 +32,14 @@ const ui = {
         }
 
         // Flecha de Tendencia metabólica
-        const trendIcon = document.getElementById('gluko-trend');
-        if (stats.trend > 0) trendIcon.innerText = "🔺";
-        else if (stats.trend < 0) trendIcon.innerText = "🔻";
-        else trendIcon.innerText = "➡️";
+        const trendImg = document.getElementById('gluko-trend-img');
+        if (stats.trend > 0) {
+            trendImg.src = "assets/images/arrow_up.png";
+        } else if (stats.trend < 0) {
+            trendImg.src = "assets/images/arrow_down.png";
+        } else {
+            trendImg.src = "assets/images/arrow_stable.png";
+        }
     },
 
     renderFoodMenu() {
