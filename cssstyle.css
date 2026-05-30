@@ -194,6 +194,20 @@ canvas {
     object-fit: contain; /* Mantiene la proporción del PNG */
 }
 
+#gluko-display.danger-low, 
+#gluko-display.danger-high {
+    border-color: #ff4757 !important; /* Rojo vibrante para el contorno */
+    box-shadow: 
+        inset 0 3px 0 rgba(255, 255, 255, 0.6), 
+        0 6px 0 #b32d38 !important; /* Relieve 3D en rojo oscuro */
+}
+
+/* Forzamos que el número grande también se pinte de rojo */
+#gluko-display.danger-low #gluko-value,
+#gluko-display.danger-high #gluko-value {
+    color: #ff4757 !important;
+}
+
 .unit {
     font-family: var(--font-game);
     font-size: 0.85rem;
@@ -205,13 +219,18 @@ canvas {
 
 #educational-alert {
     pointer-events: auto;
-    background: #fffdf0;
-    border: 3px solid #ff9f43;
+    background: #e6dccc;
+    border: 3px solid #233b6e;
+    color: #233b6e;
     border-radius: 16px;
     padding: 16px;
     text-align: center;
     box-shadow: 0 8px 16px rgba(0,0,0,0.1);
     animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+        box-shadow: 
+        inset 0 3px 0 rgba(255, 255, 255, 0.6), 
+        0 6px 0 #2b3a67!important; 
 }
 #educational-alert p {
     color: var(--text-main);
@@ -287,13 +306,20 @@ canvas {
     padding: 20px;
 }
 .modal-content {
-    background: var(--ui-panel);
+    background-color: #faefdd !important;    /* Color crema idéntico al HUD */
     border-radius: 24px;
     padding: 24px;
     width: 100%;
     max-width: 360px;
     text-align: center;
-    border: 4px solid #2c3e50;
+    border: 4px solid #233b6e;
+
+    box-shadow: 
+    inset 0 4px 0 rgba(255, 255, 255, 0.6), 
+    0 10px 0 #233b6e !important;
+
+    color: #233b6e;
+    font-family: 'Arial', sans-serif;
 }
 .food-grid {
     display: grid;
@@ -302,8 +328,8 @@ canvas {
     margin: 20px 0;
 }
 .food-item-btn {
-    background: white;
-    border: 2px solid #ccc;
+    background: #233b6e;
+    border: 2px solid #233b6e;
     border-radius: 16px;
     padding: 8px;
     display: flex;
@@ -313,8 +339,10 @@ canvas {
     font-size: 0.8rem;
     font-weight: bold;
     cursor: pointer;
+    color: #ffffff;
 }
 .food-item-btn .icon { font-size: 1.8rem; }
+
 
 .insulin-options {
     display: flex;

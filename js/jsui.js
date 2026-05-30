@@ -15,8 +15,65 @@ const ui = {
         document.getElementById('txt-energy').innerText = `${Math.round(stats.energy)}%`;
 
         // Medidor de Glucosa
+        const glukoDisplay = document.getElementById('gluko-display');
         const glukoValElement = document.getElementById('gluko-value');
-        glukoValElement.innerText = Math.round(stats.glucose);
+        
+        if (glukoValElement) {
+            glukoValElement.innerText = Math.round(stats.glucose);
+        }
+
+        if (stats.glucose < 70) {
+            // Activamos la estética roja en el cuadro y en el número
+            glukoDisplay.classList.add('danger-low');
+
+            // Verificamos si no se ha mostrado la alerta en este episodio de baja
+            if (!this.hasShownHypoAlert) {
+                const alertBox = document.getElementById('educational-alert');
+                const alertText = document.getElementById('alert-text');
+                
+                if (alertBox && alertText) {
+                    alertText.innerText = "⚠️ ¡Tu mascota tiene una hipoglucemia! Su azúcar está muy baja. Dale algo dulce (como fruta o un jugo) rápido para subir su glucosa.";
+                    alertBox.classList.remove('hidden'); // Muestra el cartel en pantalla
+                    
+                    // Bloqueamos futuras aperturas automáticas en el siguiente frame
+                    this.hasShownHypoAlert = true; 
+                }
+            }
+        } else {
+            // Si la glucosa está en rangos normales o altos, removemos el peligro
+            glukoDisplay.classList.remove('danger-low');
+            
+            // Reseteamos el flag para que la alerta pueda volver a dispararse la próxima vez que baje
+            this.hasShownHypoAlert = false;
+        }
+
+        // =====================================================================
+        // 2. CONTROL DE SUBIDAS DE GLUCOSA (HIPERGLUCEMIA > 150)
+        // =====================================================================
+        if (stats.glucose > 150) {
+            // Activamos la estética roja en el cuadro y en el número para la subida
+            glukoDisplay.classList.add('danger-high');
+
+            // Verificamos si no se ha mostrado la alerta en este episodio de alta
+            if (!this.hasShownHyperAlert) {
+                const alertBox = document.getElementById('educational-alert');
+                const alertText = document.getElementById('alert-text');
+                
+                if (alertBox && alertText) {
+                    alertText.innerText = "⚠️ ¡La glucosa de tu mascota está muy alta! Tiene hiperglucemia. Una dosis de insulina le ayudará a regularla y bajarla a un nivel seguro.";
+                    alertBox.classList.remove('hidden'); // Muestra el cartel en pantalla
+                    
+                    // Bloqueamos futuras aperturas automáticas en el siguiente frame
+                    this.hasShownHyperAlert = true; 
+                }
+            }
+        } else {
+            // Si la glucosa está en rangos normales o bajos, removemos el peligro de alta
+            glukoDisplay.classList.remove('danger-high');
+            
+            // Reseteamos el flag para que la alerta pueda volver a dispararse
+            this.hasShownHyperAlert = false;
+        }
 
         // Feedback de color dinámico en el glucómetro para identificación rápida del rango
         const meterContainer = document.getElementById('gluko-display');
@@ -73,4 +130,5 @@ const ui = {
         document.querySelectorAll('.modal').forEach(m => m.classList.add('hidden'));
         audio.play('click');
     }
+
 };

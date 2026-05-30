@@ -171,7 +171,7 @@ const game = {
     checkMetabolicAlerts() {
         if (this.private_alertThrottle) return;
 
-        if (this.statsManager.glucose < 55) {
+        if (this.statsManager.glucose < 70) {
             this.private_alertThrottle = true;
             audio.play('alert');
             ui.showEducationalAlert("¡Tu mascota necesita ayuda! Su glucosa está bajando mucho. Un poco de dulce 🍬 o un jugo 🧃 le ayudarán a recuperarse rápidamente.");
