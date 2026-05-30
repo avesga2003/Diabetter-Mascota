@@ -377,3 +377,59 @@ canvas {
     0% { transform: scale(0.8); opacity: 0; }
     100% { transform: scale(1); opacity: 1; }
 }
+
+@media (max-width: 480px) {
+    
+    /* 1. Reducimos el tamaño general de las barras superiores */
+    /* Ajusta aquí las clases de tus contenedores de barras si se llaman distinto */
+    .status-bar-container, .hud-bar { 
+        margin-bottom: 6px !important;
+        padding: 4px 10px !important;
+    }
+
+    /* 2. Compactamos el medidor de glucosa */
+    #gluko-display {
+        padding: 6px 16px !important; /* Menos espacio interno */
+        margin-top: 4px !important;
+        border-radius: 14px !important;
+    }
+    
+    #gluko-value {
+        font-size: 1.9rem !important; /* Bajamos de 2.5rem a 1.9rem */
+    }
+    
+    .gluko-icon-img {
+        width: 20px !important; /* Gotita más pequeña */
+        height: 20px !important;
+    }
+
+    /* 3. Compactamos la cuadrícula de botones de abajo */
+    .action-btn {
+        /* Reducimos los paddings exagerados que causaban la altura masiva */
+        padding: 10px 12px 10px 16px !important; 
+        font-size: 0.85rem !important; /* Texto ligeramente más pequeño */
+        border-radius: 14px !important;
+    }
+
+    /* Reducimos el tamaño de tus iconos circulares */
+    .btn-icon-img {
+        width: 32px !important;  /* Bajamos de 44px a 32px */
+        height: 32px !important;
+    }
+    
+    /* Si tienes un contenedor circular azul para el icono, bájale el tamaño aquí */
+    .icon-container-circulo { 
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    /* 4. Asegurar que el contenedor del juego no se desborde */
+    /* Si tu contenedor principal tiene otra clase (ej: .game-container), cámbialo aquí */
+    #game-wrapper, #game-container {
+        padding: 8px !important;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100vh; /* Fuerza a que todo quepa exactamente en la pantalla del celular */
+    }
+}
