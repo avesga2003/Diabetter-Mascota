@@ -425,11 +425,35 @@ canvas {
 
     /* 4. Asegurar que el contenedor del juego no se desborde */
     /* Si tu contenedor principal tiene otra clase (ej: .game-container), cámbialo aquí */
-    #game-wrapper, #game-container {
-        padding: 8px !important;
+/* 1. Ajuste del contenedor principal del juego */
+    #game-wrapper, #game-container, body {
+        /* Cambiamos 100vh por 100dvh para que calcule la altura REAL 
+           restando automáticamente las barras del navegador del celular */
+        height: 100dvh !important; 
+        
+        /* Agregamos un margen interno abajo para obligar a los botones 
+           a subirse y separarse del borde del teléfono */
+        padding-bottom: 25px !important; 
+        
+        /* Evita que los paddings alteren el tamaño total configurado */
+        box-sizing: border-box; 
+        
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        height: 100vh; /* Fuerza a que todo quepa exactamente en la pantalla del celular */
+    }
+
+    /* 2. Controlar que el área del perrito (Canvas) no empuje los botones hacia abajo */
+    /* Ajusta aquí el ID o etiqueta que tenga tu Canvas de la mascota */
+    canvas, #pet-canvas {
+        max-height: 40vh !important; /* Le pone un límite de altura al perro para dar espacio */
+        object-fit: contain;         /* Evita que el sprite se deforme */
+    }
+
+    /* 3. Ajuste opcional para compactar un poco la separación de la cuadrícula de botones */
+    /* Cambia '.button-grid' por la clase o ID real que agrupa tus 4 botones */
+    .button-grid, #buttons-container {
+        gap: 8px !important; /* Reduce el espacio entre los botones para que ocupen menos altura */
+        margin-bottom: 5px !important;
     }
 }
