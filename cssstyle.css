@@ -381,7 +381,6 @@ canvas {
 @media (max-width: 480px) {
     
     /* 1. Reducimos el tamaño general de las barras superiores */
-    /* Ajusta aquí las clases de tus contenedores de barras si se llaman distinto */
     .status-bar-container, .hud-bar { 
         margin-bottom: 6px !important;
         padding: 4px 10px !important;
@@ -389,71 +388,47 @@ canvas {
 
     /* 2. Compactamos el medidor de glucosa */
     #gluko-display {
-        padding: 6px 16px !important; /* Menos espacio interno */
+        padding: 6px 16px !important; 
         margin-top: 4px !important;
         border-radius: 14px !important;
     }
     
     #gluko-value {
-        font-size: 1.9rem !important; /* Bajamos de 2.5rem a 1.9rem */
+        font-size: 1.9rem !important; 
     }
     
     .gluko-icon-img {
-        width: 20px !important; /* Gotita más pequeña */
+        width: 20px !important; 
         height: 20px !important;
     }
 
     /* 3. Compactamos la cuadrícula de botones de abajo */
     .action-btn {
-        /* Reducimos los paddings exagerados que causaban la altura masiva */
         padding: 10px 12px 10px 16px !important; 
-        font-size: 0.85rem !important; /* Texto ligeramente más pequeño */
+        font-size: 0.85rem !important; 
         border-radius: 14px !important;
     }
 
-    /* Reducimos el tamaño de tus iconos circulares */
     .btn-icon-img {
-        width: 32px !important;  /* Bajamos de 44px a 32px */
+        width: 32px !important;  
         height: 32px !important;
     }
     
-    /* Si tienes un contenedor circular azul para el icono, bájale el tamaño aquí */
     .icon-container-circulo { 
         width: 40px !important;
         height: 40px !important;
     }
 
-    /* 4. Asegurar que el contenedor del juego no se desborde */
-    /* Si tu contenedor principal tiene otra clase (ej: .game-container), cámbialo aquí */
-/* 1. Ajuste del contenedor principal del juego */
-    #game-wrapper, #game-container, body {
-        /* Cambiamos 100vh por 100dvh para que calcule la altura REAL 
-           restando automáticamente las barras del navegador del celular */
+    /* 4. AJUSTADO: Forzamos el espacio interno inferior para subir los botones */
+    #game-wrapper, #game-container {
+        /* Aumentamos el padding de abajo a 28px para empujar los botones hacia arriba */
+        padding: 8px 8px 28px 8px !important; 
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        
+        /* Cambiamos a dvh para que el celular no cuente la barra del navegador */
         height: 100dvh !important; 
-        
-        /* Agregamos un margen interno abajo para obligar a los botones 
-           a subirse y separarse del borde del teléfono */
-        padding-bottom: 25px !important; 
-        
-        /* Evita que los paddings alteren el tamaño total configurado */
-        box-sizing: border-box; 
-        
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-
-    /* 2. Controlar que el área del perrito (Canvas) no empuje los botones hacia abajo */
-    /* Ajusta aquí el ID o etiqueta que tenga tu Canvas de la mascota */
-    canvas, #pet-canvas {
-        max-height: 40vh !important; /* Le pone un límite de altura al perro para dar espacio */
-        object-fit: contain;         /* Evita que el sprite se deforme */
-    }
-
-    /* 3. Ajuste opcional para compactar un poco la separación de la cuadrícula de botones */
-    /* Cambia '.button-grid' por la clase o ID real que agrupa tus 4 botones */
-    .button-grid, #buttons-container {
-        gap: 8px !important; /* Reduce el espacio entre los botones para que ocupen menos altura */
-        margin-bottom: 5px !important;
+        box-sizing: border-box !important; /* Evita que el padding extra rompa el tamaño */
     }
 }
