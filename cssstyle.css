@@ -402,15 +402,6 @@ canvas {
         height: 20px !important;
     }
 
-    /* =====================================================================
-       [NUEVO] INTERVENCIÓN DE LA MASCOTA: ACHICAR Y SUBIR
-       ===================================================================== */
-    canvas, #pet-canvas {
-        max-height: 36vh !important;    /* Controla el tamaño vertical (ajusta a 32vh si lo quieres más enano) */
-        transform: translateY(-16px) !important; /* Lo levanta sutilmente hacia arriba */
-        object-fit: contain !important;  /* Protege la ilustración para que jamás se deforme */
-    }
-
     /* 3. Compactamos la cuadrícula de botones de abajo */
     .action-btn {
         padding: 10px 12px 10px 16px !important; 
@@ -428,13 +419,16 @@ canvas {
         height: 40px !important;
     }
 
-    /* 4. Mantenemos el espacio seguro para los botones */
+    /* 4. AJUSTADO: Forzamos el espacio interno inferior para subir los botones */
     #game-wrapper, #game-container {
+        /* Aumentamos el padding de abajo a 28px para empujar los botones hacia arriba */
         padding: 8px 8px 28px 8px !important; 
         display: flex !important;
         flex-direction: column !important;
         justify-content: space-between !important;
+        
+        /* Cambiamos a dvh para que el celular no cuente la barra del navegador */
         height: 100dvh !important; 
-        box-sizing: border-box !important; 
+        box-sizing: border-box !important; /* Evita que el padding extra rompa el tamaño */
     }
 }
