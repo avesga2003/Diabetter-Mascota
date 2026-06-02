@@ -10,12 +10,12 @@ class PetRenderer {
         this.imagesLoaded = 0;
 
         // Registramos los estados de la mascota vinculándolos a su ruta de asset física
-        this.registerSprite('idle', 'assets/images/mascota_idle.png');
-        this.registerSprite('happy', 'assets/images/mascota_feliz.png');
-        this.registerSprite('excited', 'assets/images/mascota_feliz.png'); // Usa feliz o añade un sprite exclusivo si lo deseas
-        this.tiredSprite = this.registerSprite('tired', 'assets/images/mascota_cansada.png');
-        this.registerSprite('sick', 'assets/images/mascota_enferma.png');
-        this.registerSprite('sleeping', 'assets/images/mascota_dormida.png');
+        this.registerSprite('idle', 'assets/images/mascota_idle.webp');
+        this.registerSprite('happy', 'assets/images/mascota_feliz.webp');
+        this.registerSprite('excited', 'assets/images/mascota_feliz.webp'); // Usa feliz o añade un sprite exclusivo si lo deseas
+        this.tiredSprite = this.registerSprite('tired', 'assets/images/mascota_cansada.webp');
+        this.registerSprite('sick', 'assets/images/mascota_enferma.webp');
+        this.registerSprite('sleeping', 'assets/images/mascota_dormida.webp');
 
         // Registro de fondos ambientales independientes
         this.imagesToLoad += 2;
