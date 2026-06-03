@@ -30,12 +30,12 @@ const game = {
         // Evento de bienvenida con enfoque positivo ante cambios de día real
         if (window.isNewDayEvent) {
             setTimeout(() => {
-                ui.showEducationalAlert("¡Nuevo día! Tu mascota se ha despertado con un nivel de glucosa diferente. ¡Vamos a revisar juntos qué necesita hoy!");
+                ui.showEducationalAlert("¡Nuevo día! Gluko se ha despertado con un nivel de glucosa diferente. ¡Vamos a revisar juntos qué necesita hoy!");
                 window.isNewDayEvent = false;
             }, 1000);
         } else {
             setTimeout(() => {
-                ui.showEducationalAlert("¡Hola! Tu mascota se alegra mucho de verte. ¡Cuidemos de su salud juntos hoy!");
+                ui.showEducationalAlert("¡Hola! Gluko se alegra mucho de verte. ¡Cuidemos de su salud juntos hoy!");
             }, 800);
         }
 
@@ -142,7 +142,7 @@ const game = {
         this.pet.triggerInteractionEffect(this.canvas.width, this.canvas.height, 'insulin');
 
         document.getElementById('insulin-menu').classList.add('hidden');
-        ui.showEducationalAlert(`Le diste ${units}U de insulina a tu mascota. La insulina ayuda a transformar la glucosa en energía útil.`);
+        ui.showEducationalAlert(`Le diste ${units}U de insulina a Gluko. La insulina ayuda a transformar la glucosa en energía útil.`);
     },
 
     toggleSleep() {
@@ -150,9 +150,9 @@ const game = {
         this.isSleeping = !this.isSleeping;
         
         if (this.isSleeping) {
-            ui.showEducationalAlert("Tu mascota se va a dormir. Su energía se recuperará y su glucosa se estabilizará poco a poco.");
+            ui.showEducationalAlert("Gluko se va a dormir. Su energía se recuperará y su glucosa se estabilizará poco a poco.");
         } else {
-            ui.showEducationalAlert("¡Buenos días! Tu mascota se ha despertado con energía.");
+            ui.showEducationalAlert("¡Buenos días! Gluko se ha despertado con energía.");
         }
     },
 
@@ -174,12 +174,12 @@ const game = {
         if (this.statsManager.glucose < 70) {
             this.private_alertThrottle = true;
             audio.play('alert');
-            ui.showEducationalAlert("¡Tu mascota necesita ayuda! Su glucosa está bajando mucho. Un poco de dulce 🍬 o un jugo 🧃 le ayudarán a recuperarse rápidamente.");
+            ui.showEducationalAlert("¡Gluko necesita ayuda! Su glucosa está bajando mucho. Un poco de dulce 🍬 o un jugo 🧃 le ayudarán a recuperarse rápidamente.");
             setTimeout(() => this.private_alertThrottle = false, 25000); // Evita spam de alertas
         } else if (this.statsManager.glucose > 250) {
             this.private_alertThrottle = true;
             audio.play('alert');
-            ui.showEducationalAlert("¡Vamos a cuidarla juntos! La glucosa de tu mascota está algo alta. Una dosis controlada de insulina 💉 o un paseo (jugar) le ayudarán a balancearse.");
+            ui.showEducationalAlert("¡Vamos a cuidarla juntos! La glucosa de Gluko está algo alta. Una dosis controlada de insulina 💉 o un paseo (jugar) le ayudarán a balancearse.");
             setTimeout(() => this.private_alertThrottle = false, 25000);
         }
     },

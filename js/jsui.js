@@ -32,7 +32,7 @@ const ui = {
                 const alertText = document.getElementById('alert-text');
                 
                 if (alertBox && alertText) {
-                    alertText.innerText = "⚠️ ¡Tu mascota tiene una hipoglucemia! Su azúcar está muy baja. Dale algo dulce (como fruta o un jugo) rápido para subir su glucosa.";
+                    alertText.innerText = "⚠️ ¡Gluko tiene una hipoglucemia! Su azúcar está muy baja. Dale algo dulce (como fruta o un jugo) rápido para subir su glucosa.";
                     alertBox.classList.remove('hidden'); // Muestra el cartel en pantalla
                     
                     // Bloqueamos futuras aperturas automáticas en el siguiente frame
@@ -60,7 +60,7 @@ const ui = {
                 const alertText = document.getElementById('alert-text');
                 
                 if (alertBox && alertText) {
-                    alertText.innerText = "⚠️ ¡La glucosa de tu mascota está muy alta! Tiene hiperglucemia. Una dosis de insulina le ayudará a regularla y bajarla a un nivel seguro.";
+                    alertText.innerText = "⚠️ ¡La glucosa de Gluko está muy alta! Tiene hiperglucemia. Una dosis de insulina le ayudará a regularla y bajarla a un nivel seguro.";
                     alertBox.classList.remove('hidden'); // Muestra el cartel en pantalla
                     
                     // Bloqueamos futuras aperturas automáticas en el siguiente frame
