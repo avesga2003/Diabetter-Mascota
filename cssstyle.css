@@ -373,6 +373,184 @@ canvas {
 
 .hidden { display: none !important; }
 
+#onboarding-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(35, 59, 110, 0.6); /* Azul oscuro semitransparente */
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Asegura que tape todo lo demás */
+}
+
+/* Caja de contenido estética crema */
+.onboarding-content {
+    background-color: #faefdd !important;   /* Crema idéntico al HUD */
+    border: 3px solid #233b6e !important;   /* Borde azul oscuro */
+    border-radius: 24px;
+    padding: 24px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 
+        inset 0 4px 0 rgba(255, 255, 255, 0.6), 
+        0 10px 0 #233b6e !important;         /* Relieve 3D azul oscuro */
+    text-align: center;
+    box-sizing: border-box;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.onboarding-title {
+    color: #233b6e;
+    font-size: 1.4rem;
+    margin-top: 0;
+    margin-bottom: 14px;
+}
+
+.onboarding-text {
+    color: #233b6e;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+/* Lista del -corial */
+.tutorial-list {
+    text-align: left;
+    color: #233b6e;
+    font-size: 0.9rem;
+    padding-left: 15px;
+    margin-bottom: 20px;
+}
+
+.tutorial-list li {
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+/* Botones del tutorial (Mismo estilo que tus action-btn) */
+.onboarding-btn {
+    background-color: #233b6e;
+    color: #faefdd;
+    border: 2px solid #152443;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 14px;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #152443;
+    transition: all 0.1s ease;
+}
+
+.onboarding-btn:active {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 #152443;
+}
+
+.tutorial-scroll-area {
+    overflow-y: auto;
+    max-height: 55vh; /* Se adapta perfectamente al alto de celulares antiguos y modernos */
+    text-align: left;
+    padding-right: 6px;
+    margin-bottom: 10px;
+}
+
+/* Estilo para personalizar la barra de scroll y que se vea bonita */
+.tutorial-scroll-area::-webkit-scrollbar {
+    width: 6px;
+}
+.tutorial-scroll-area::-webkit-scrollbar-thumb {
+    background-color: #233b6e;
+    border-radius: 10px;
+}
+
+/* Subtítulos de secciones del tutorial */
+.tutorial-section h3 {
+    color: #233b6e;
+    font-size: 1.1rem;
+    margin-top: 16px;
+    margin-bottom: 8px;
+    border-bottom: 2px dashed rgba(35, 59, 110, 0.2);
+    padding-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Contenedor fila de cada item */
+.tutorial-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    background: rgba(255, 255, 255, 0.4);
+    padding: 8px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(35, 59, 110, 0.1);
+}
+
+.tutorial-item p {
+    margin: 0;
+    color: #233b6e;
+    font-size: 0.85rem;
+    line-height: 1.3;
+}
+
+/* Adaptación de tus círculos azules de botones para formato miniatura */
+.mini-tut-icon {
+    width: 38px !important;
+    height: 38px !important;
+    flex-shrink: 0; /* Evita que el flexbox lo aplaste */
+}
+.mini-tut-icon .btn-icon-img {
+    width: 24px !important;
+    height: 24px !important;
+}
+
+/* Iconos integrados directo en los títulos */
+.tut-icon-inline {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.tut-icon-inline-list {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+
+/* Bloques destacados para las alertas de glucosa */
+.alert-low-bg { background-color: #fff3e0 !important; border-color: #ff9f43 !important; }
+.alert-high-bg { background-color: #ffebee !important; border-color: #ee5253 !important; }
+
+.layout-mt {
+    margin-top: auto; /* Empuja el botón final al fondo de la tarjeta */
+}
+
+/* Clase utilitaria para ocultar elementos */
+.hidden {
+    display: none !important;
+}
+
+/* AJUSTE RESPONSIVO MÓVIL: Añade esto dentro de tu @media (max-width: 480px) */
+@media (max-width: 480px) {
+    .onboarding-content {
+        width: 85% !important;
+        padding: 18px !important;
+    }
+    .onboarding-title { font-size: 1.2rem !important; }
+    .onboarding-text, .tutorial-list { font-size: 0.85rem !important; }
+}
+
+
 @keyframes popIn {
     0% { transform: scale(0.8); opacity: 0; }
     100% { transform: scale(1); opacity: 1; }

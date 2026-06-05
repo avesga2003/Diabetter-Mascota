@@ -87,6 +87,97 @@
         </div>
     </div>
 
+<div id="onboarding-overlay" class="menu-overlay hidden">
+    <div class="onboarding-content">
+        
+        <div id="onboarding-screen-1" class="onboarding-screen">
+            <h2 class="onboarding-title">
+                <img src="assets/images/ico_salud.png" class="tut-icon-inline" alt="Huella">
+                Tu nuevo compañero
+            </h2>
+            <p class="onboarding-text">
+                ¡Hola! Este tierno perrito acaba de ser adoptado, pero tiene una condición especial: <strong>vive con diabetes</strong>. 
+                Tu misión más importante será aprender a cuidar de él, monitorear sus niveles de azúcar y asegurarte de que crezca fuerte y saludable. ¡Cuenta contigo!
+            </p>
+            <button id="btn-onboarding-next" class="onboarding-btn">Siguiente</button>
+        </div>
+
+        <div id="onboarding-screen-2" class="onboarding-screen hidden">
+            <h2 class="onboarding-title">
+                <img src="assets/images/tut_guia.png" class="tut-icon-inline" alt="Guía">
+                Guía de Cuidados
+            </h2>
+            <div class="tutorial-scroll-area">
+                
+                <div class="tutorial-section">
+                    <h3>
+                        Barras de Estado
+                    </h3>
+                    <div class="tutorial-item">
+                        <div class="tutorial-icon-frame bar-icon"><div class="bar-sample-health"></div></div>
+                        <p><strong>Salud, Hambre y Energía:</strong> No dejes que bajen a cero. Si Gluko tiene hambre o está cansado, su salud empezará a deteriorarse.</p>
+                    </div>
+                </div>
+
+                <div class="tutorial-section">
+                    <h3>
+                        <img src="assets/images/arrow_stable.png" class="tut-icon-inline" alt="Glucómetro">
+                        El Glucómetro
+                    </h3>
+                    <p class="tutorial-text-block">Es el cuadro central. Monitorea la glucosa en tiempo real:</p>
+                    <div class="tutorial-item alert-low-bg">
+                        <img src="assets/images/arrow_down.png" class="tut-icon-inline-list" alt="Glucosa Baja">
+                        <p><strong>Menos de 70 (Hipoglucemia):</strong> ¡Azúcar baja! Dale comida rápida para subirla de inmediato.</p>
+                    </div>
+                    <div class="tutorial-item alert-high-bg">
+                        <img src="assets/images/arrow_up.png" class="tut-icon-inline-list" alt="Glucosa Alta">
+                        <p><strong>Más de 150 (Hiperglucemia):</strong> ¡Azúcar alta! Necesita una dosis de insulina para regularse.</p>
+                    </div>
+                </div>
+
+                <div class="tutorial-section">
+                    <h3>
+                        <img src="assets/images/ico_energia.png" class="tut-icon-inline" alt="Acciones">
+                        Botones de Acción
+                    </h3>
+                    
+                    <div class="tutorial-item">
+                        <div class="icon-container-circulo mini-tut-icon">
+                            <img src="assets/images/btn_comer.png" class="btn-icon-img" alt="Comida">
+                        </div>
+                        <p><strong>Alimentar:</strong> Abre el menú de comida. Ojo: los alimentos dulces o carbohidratos suben la energía pero disparan la glucosa rápidamente.</p>
+                    </div>
+
+                    <div class="tutorial-item">
+                        <div class="icon-container-circulo mini-tut-icon">
+                            <img src="assets/images/btn_dormir.png" class="btn-icon-img" alt="Sueño">
+                        </div>
+                        <p><strong>Descansar:</strong> Gluko duerme para recuperar su energía, pero recuerda medir su glucosa antes y después de dormir para evitar sorpresas.</p>
+                    </div>
+
+                    <div class="tutorial-item">
+                        <div class="icon-container-circulo mini-tut-icon">
+                            <img src="assets/images/btn_insulina.png" class="btn-icon-img" alt="Insulina">
+                        </div>
+                        <p><strong>Insulina:</strong> Aplica una dosis cuando el glucómetro esté en rojo por encima de 150. Le ayudará a metabolizar el azúcar y regresar a su rango seguro.</p>
+                    </div>
+
+                    
+                    <div class="tutorial-item">
+                        <div class="icon-container-circulo mini-tut-icon">
+                            <img src="assets/images/btn_jugar.png" class="btn-icon-img" alt="Jugar">
+                        </div>
+                        <p><strong>Jugar:</strong> Juega con Gluko para mantenerlo activo y feliz. Asegúrate de que tenga suficiente energía antes de jugar.</p>
+                    </div>
+
+                </div>
+
+            </div> <button id="btn-onboarding-finish" class="onboarding-btn layout-mt">¡Entendido, a jugar!</button>
+        </div>
+
+    </div>
+</div>
+
     <!-- Scripts Modulares -->
     <script src="js/jsaudio.js"></script>
     <script src="js/jssaveSystem.js"></script>
